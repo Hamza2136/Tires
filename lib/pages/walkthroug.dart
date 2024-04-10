@@ -44,147 +44,150 @@ class _Walkthrough extends State<Walkthrough> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double imageHeight = screenHeight * 0.7;
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 50,
-            left: 20,
-            right: 20,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width - 180,
-              child: const Text(
-                'In consequat, quam id sodales hendrerit, eros mi molestie leo, nec lacinia risus neque tristique augue.',
-                style: TextStyle(
-                  fontSize: 14,
-                  // color: Colors.grey,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.clip, // or TextOverflow.ellipsis
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
               ),
-            ),
-          ),
-          Positioned(
-            top: 105,
-            left: 30,
-            right: 30,
-            bottom: 70,
-            child: SizedBox(
-              child: Image.asset(
-                getpath(current),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 40,
-            left: 40,
-            child: Row(
-              children: [
-                Text(
-                  '$current ',
+              const SizedBox(
+                // width: MediaQuery.of(context).size.width - 180,
+                child: Text(
+                  'Welcome to our Application. We provide you with every type of car parts and materials you need in terms of demand and supply.',
                   style: TextStyle(
-                    fontSize: 32,
-                    color: myColor,
+                    fontSize: 14,
                     fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w600,
                   ),
-                ),
-                Text(
-                  '\\ $total',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: myColor,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(width: 10),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 45,
-            right: 100,
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  debugPrint('<');
-                  if (current > 1) {
-                    current -= 1;
-                  } else if (current == 1) {
-                    current = 1;
-                  }
-                });
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: myColor,
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Icon(
-                    Icons.chevron_left,
-                    color: Colors.white,
-                  ),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.clip,
                 ),
               ),
-            ),
-          ),
-          Positioned(
-            bottom: 45,
-            right: 50,
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  debugPrint('>');
-                  if (current < 5) {
-                    current += 1;
-                  } else if (current == 5) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Signin()));
-                  }
-                });
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: myColor,
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                height: imageHeight,
+                child: Image.asset(
+                  getpath(current),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Icon(
-                    Icons.chevron_right,
-                    color: Colors.white,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Text(
+                    '$current ',
+                    style: TextStyle(
+                      fontSize: 32,
+                      color: myColor,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
+                  Text(
+                    '\\ $total',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: myColor,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const Spacer(flex: 2),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        debugPrint('<');
+                        if (current > 1) {
+                          current -= 1;
+                        } else if (current == 1) {
+                          current = 1;
+                        }
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: myColor,
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Icon(
+                          Icons.chevron_left,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        debugPrint('>');
+                        if (current < 5) {
+                          current += 1;
+                        } else if (current == 5) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Signin()));
+                        }
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: myColor,
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Icon(
+                          Icons.chevron_right,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ),
-          Positioned(
-            right: 55,
-            bottom: 15,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Signin()));
-              },
-              child: Text(
-                'Skip >',
-                style: TextStyle(
-                  color: myColor,
-                  fontFamily: 'Montserrat',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+              const SizedBox(
+                height: 10,
               ),
-            ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Signin()));
+                    },
+                    child: Text(
+                      'Skip >',
+                      style: TextStyle(
+                        color: myColor,
+                        fontFamily: 'Montserrat',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

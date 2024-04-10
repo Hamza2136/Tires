@@ -44,7 +44,6 @@ class FourXFourSearchState extends State<FourXFourSearch> {
               fit: BoxFit.cover,
             ),
             Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 AppBar(
                   backgroundColor: Colors.transparent,
@@ -77,59 +76,64 @@ class FourXFourSearchState extends State<FourXFourSearch> {
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned(
-            top: 20,
-            left: 10,
-            child: Container(
-              height: 30,
-              decoration: BoxDecoration(
-                border: Border.all(color: HexColor('#1A237E'), width: 1.0),
-                borderRadius: BorderRadius.circular(20.0), // Customize border
-              ),
-              child: Row(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  const SizedBox(width: 20.0),
-                  Text(
-                    'Gladiator Mojova 2020',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                      color: HexColor('#1A237E'),
+                  Container(
+                    height: 30,
+                    width: 260,
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: HexColor('#1A237E'), width: 1.0),
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Customize border
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(width: 20.0),
+                        Text(
+                          'Gladiator Mojova 2020',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            color: HexColor('#1A237E'),
+                          ),
+                        ),
+                        const Spacer(
+                          flex: 2,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            debugPrint('hahah');
+                          },
+                          child: const Icon(Icons.close),
+                        ),
+                        const SizedBox(width: 20.0),
+                      ],
                     ),
                   ),
-                  const SizedBox(width: 20.0),
-                  GestureDetector(
-                    onTap: () {
-                      debugPrint('hahah');
-                    },
-                    child: const Icon(Icons.close),
+                  const Spacer(
+                    flex: 2,
                   ),
-                  const SizedBox(width: 20.0),
+                  GestureDetector(
+                    child: Icon(
+                      Icons.filter_alt_sharp,
+                      color: HexColor('1A237E'),
+                      size: 30,
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ),
-          Positioned(
-            top: 20,
-            right: 20,
-            child: GestureDetector(
-              child: Icon(
-                Icons.filter_alt_sharp,
-                color: HexColor('1A237E'),
-                size: 30,
+              const SizedBox(
+                height: 15,
               ),
-            ),
-          ),
-          Positioned(
-            top: 70,
-            right: 20,
-            left: 20,
-            bottom: 20,
-            child: SingleChildScrollView(
-              child: Align(
+              Align(
                 alignment: Alignment.center,
                 child: Column(
                   children: [
@@ -163,8 +167,8 @@ class FourXFourSearchState extends State<FourXFourSearch> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        const Spacer(
+                          flex: 2,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -232,8 +236,8 @@ class FourXFourSearchState extends State<FourXFourSearch> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        const Spacer(
+                          flex: 2,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -298,8 +302,8 @@ class FourXFourSearchState extends State<FourXFourSearch> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        const Spacer(
+                          flex: 2,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -334,9 +338,9 @@ class FourXFourSearchState extends State<FourXFourSearch> {
                   ],
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

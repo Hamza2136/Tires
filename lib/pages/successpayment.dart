@@ -1,24 +1,24 @@
+// ignore: file_names
+// ignore_for_file: sized_box_for_whitespace, file_names, duplicate_ignore, depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:tires/pages/home.dart';
 
-class ResendEmail extends StatefulWidget {
-  const ResendEmail({super.key});
+class OrderSuccess extends StatefulWidget {
+  const OrderSuccess({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return ResendEmailState();
+    return OrderSuccessState();
   }
 }
 
-class ResendEmailState extends State<ResendEmail> {
-  TextEditingController emailController = TextEditingController();
-  TextStyle fieldStyle = const TextStyle(
-    fontFamily: 'Montserrat',
-    fontWeight: FontWeight.w400,
-    fontSize: 14,
-  );
+class OrderSuccessState extends State<OrderSuccess> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double buttonWidth = screenWidth * 0.9;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -26,69 +26,60 @@ class ResendEmailState extends State<ResendEmail> {
           child: Column(
             children: [
               const SizedBox(
-                height: 130,
+                height: 120,
               ),
-              Image.asset('images/logo.png'),
+              Image.asset('images/payment/success.png'),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Text(
-                'Enter Email',
+                'Thank you for your order!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
                   color: HexColor('#1A237E'),
-                  fontFamily: 'Montserrat',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
               Text(
-                'Enter email address which recieve a 4 digit verification code',
+                'Quisque suscipit ipsum est, eu venenatis leo ornare eget. Ut porta facilisis elementum. Sed condimentum sed',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: HexColor('#82222280'),
                   fontFamily: 'Montserrat',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: HexColor('#1A237E'),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: 'E-mail',
-                  labelStyle: fieldStyle,
-                  hintText: 'Enter Your Email...',
-                  hintStyle: fieldStyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
-                style: fieldStyle,
               ),
               const SizedBox(
                 height: 20,
               ),
               SizedBox(
-                width: 320,
+                height: 50,
+                width: buttonWidth,
                 child: ElevatedButton(
                   onPressed: () {
-                    debugPrint('Button Pressed');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Home(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('#1A237E'),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0),
+                      borderRadius: BorderRadius.circular(
+                          0), // Set border radius to 0 for a square button
                     ),
                   ),
                   child: const Text(
-                    'Submit',
+                    'Back to Home',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.w600,

@@ -26,18 +26,18 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 120,
-            left: 97,
-            child: Image.asset('images/logo.png'),
-          ),
-          Positioned(
-            top: 220,
-            left: 28,
-            right: 28, // Added right constraint
-            child: TextField(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 130,
+            ),
+            Image.asset('images/logo.png'),
+            const SizedBox(
+              height: 30,
+            ),
+            TextField(
               controller: nameController,
               decoration: InputDecoration(
                 labelText: 'Name', // Changed label to labelText
@@ -50,12 +50,10 @@ class _SignUpState extends State<SignUp> {
               ),
               style: fieldStyle,
             ),
-          ),
-          Positioned(
-            top: 300,
-            left: 28,
-            right: 28, // Added right constraint
-            child: TextField(
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
               controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Email', // Changed label to labelText
@@ -68,12 +66,10 @@ class _SignUpState extends State<SignUp> {
               ),
               style: fieldStyle,
             ),
-          ),
-          Positioned(
-            top: 380,
-            left: 28,
-            right: 28, // Added right constraint
-            child: TextField(
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
               controller: passwordController,
               decoration: InputDecoration(
                 labelText: 'Password', // Changed label to labelText
@@ -86,36 +82,34 @@ class _SignUpState extends State<SignUp> {
               ),
               style: fieldStyle,
             ),
-          ),
-          Positioned(
-            top: 460,
-            left: 28,
-            right: 28,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Home()));
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: myColor,
-                foregroundColor: Colors.white,
-              ),
-              child: const Text(
-                'Sign up',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
+            const SizedBox(
+              height: 30,
+            ),
+            SizedBox(
+              width: 320,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Home()));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: myColor,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0),
+                  ),
+                ),
+                child: const Text(
+                  'Sign up',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            top: 510,
-            left: 20,
-            right: 20,
-            // right: 28,
-            child: GestureDetector(
+            GestureDetector(
               onTap: () {
                 debugPrint('Terms and Policies');
               },
@@ -129,8 +123,8 @@ class _SignUpState extends State<SignUp> {
                     decoration: TextDecoration.underline,
                   )),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -18,7 +18,7 @@ class FeaturedProductsState extends State<FeaturedProducts> {
     return SizedBox(
       width: MediaQuery.of(context).size.width - 210,
       child: Text(
-        'Rs 34000',
+        'RS 34000',
         textAlign: TextAlign.start,
         style: TextStyle(
           color: HexColor('#D32F2F'),
@@ -30,9 +30,6 @@ class FeaturedProductsState extends State<FeaturedProducts> {
     );
   }
 
-  String path = 'images/tiresandwheels/1.png';
-  String title = 'Jeep BF Goodrich Tires';
-  String price = 'RS 34000';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,66 +75,57 @@ class FeaturedProductsState extends State<FeaturedProducts> {
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned(
-            top: 10,
-            left: 10,
-            right: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color: const Color.fromARGB(255, 255, 237, 237),
-                    width: 1.0),
-                borderRadius: BorderRadius.circular(8.0), // Customize border
-                color: const Color.fromARGB(255, 255, 237, 237),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 255, 237, 237),
+                      width: 1.0),
+                  borderRadius: BorderRadius.circular(8.0), // Customize border
+                  color: const Color.fromARGB(255, 255, 237, 237),
+                ),
+                padding: const EdgeInsets.all(16.0), // Add padding for spacing
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Honda',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationColor: HexColor('#D32F2F'),
+                        decorationThickness: 3,
+                        fontSize: 16.0,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        color: HexColor('#1A237E'),
+                      ),
+                    ),
+                    Text(
+                      'Audi',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        color: HexColor('#1A237E'),
+                      ),
+                    ),
+                    Text(
+                      'Mercedez',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        color: HexColor('#1A237E'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              padding: const EdgeInsets.all(16.0), // Add padding for spacing
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .spaceBetween, // Space evenly between the text widgets
-                children: [
-                  Text(
-                    'Honda',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationColor: HexColor('#D32F2F'),
-                      decorationThickness: 3,
-                      fontSize: 16.0,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                      color: HexColor('#1A237E'),
-                    ),
-                  ),
-                  Text(
-                    'Audi',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                      color: HexColor('#1A237E'),
-                    ),
-                  ),
-                  Text(
-                    'Mercedez',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                      color: HexColor('#1A237E'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: 70,
-            right: 10,
-            left: 10,
-            bottom: 10,
-            child: SingleChildScrollView(
-              child: Column(
+              Column(
                 children: [
                   Card(
                     child: Padding(
@@ -148,12 +136,14 @@ class FeaturedProductsState extends State<FeaturedProducts> {
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProductDetails(
-                                          path: path,
-                                          title: title,
-                                          price: price)));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ProductDetails(
+                                      path: 'images/tiresandwheels/1.png',
+                                      title: 'Jeep BF Goodrich Tires',
+                                      price: 'RS 34000'),
+                                ),
+                              );
                             },
                             child: Container(
                               height: 100,
@@ -161,68 +151,30 @@ class FeaturedProductsState extends State<FeaturedProducts> {
                               child: Image.asset('images/tiresandwheels/1.png'),
                             ),
                           ),
-                          const SizedBox(width: 8.0),
+                          const Spacer(
+                            flex: 2,
+                          ),
                           GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProductDetails(
-                                          path: path,
-                                          title: title,
-                                          price: price)));
-                            },
-                            child: Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
+                            onTap: () {},
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width - 170,
+                                  child: Text(
                                     'Jeep BF Goodrich Tires',
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                       color: HexColor('#1A237E'),
                                       fontFamily: 'Montserrat',
+                                      overflow: TextOverflow.clip,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 16,
+                                      fontSize: 15,
                                     ),
                                   ),
-                                  const SizedBox(height: 8.0),
-                                  tempPrice(),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 100,
-                            width: 100,
-                            child: Image.asset('images/tiresandwheels/2.png'),
-                          ),
-                          const SizedBox(width: 8.0),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Jeep Power Stop Brakes',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    color: HexColor('#1A237E'),
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
                                 ),
-                                const SizedBox(height: 8.0),
+                                const SizedBox(height: 20.0),
                                 tempPrice(),
                               ],
                             ),
@@ -237,27 +189,49 @@ class FeaturedProductsState extends State<FeaturedProducts> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 100,
-                            width: 100,
-                            child: Image.asset('images/tiresandwheels/3.png'),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ProductDetails(
+                                      path: 'images/tiresandwheels/2.png',
+                                      title:
+                                          'RT Off-Road Jeep Accessories & Parts',
+                                      price: 'RS 34000'),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 100,
+                              width: 100,
+                              child: Image.asset('images/tiresandwheels/2.png'),
+                            ),
                           ),
-                          const SizedBox(width: 8.0),
-                          Expanded(
+                          const Spacer(
+                            flex: 2,
+                          ),
+                          GestureDetector(
+                            onTap: () {},
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'RT Off-Road Jeep Accessories & Parts',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    color: HexColor('#1A237E'),
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width - 170,
+                                  child: Text(
+                                    'RT Off-Road Jeep Accessories & Parts',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      color: HexColor('#1A237E'),
+                                      fontFamily: 'Montserrat',
+                                      overflow: TextOverflow.clip,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(height: 8.0),
+                                const SizedBox(height: 20.0),
                                 tempPrice(),
                               ],
                             ),
@@ -272,27 +246,49 @@ class FeaturedProductsState extends State<FeaturedProducts> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 100,
-                            width: 100,
-                            child: Image.asset('images/tiresandwheels/4.png'),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ProductDetails(
+                                      path: 'images/tiresandwheels/3.png',
+                                      title:
+                                          'Jeep Rubicon Express Suspension Parts & Accessories',
+                                      price: 'RS 34000'),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 100,
+                              width: 100,
+                              child: Image.asset('images/tiresandwheels/3.png'),
+                            ),
                           ),
-                          const SizedBox(width: 8.0),
-                          Expanded(
+                          const Spacer(
+                            flex: 2,
+                          ),
+                          GestureDetector(
+                            onTap: () {},
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Jeep Rubicon Express Suspension Parts & Accessories',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    color: HexColor('#1A237E'),
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width - 170,
+                                  child: Text(
+                                    'Jeep Rubicon Express Suspension Parts & Accessories',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      color: HexColor('#1A237E'),
+                                      fontFamily: 'Montserrat',
+                                      overflow: TextOverflow.clip,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(height: 8.0),
+                                const SizedBox(height: 20.0),
                                 tempPrice(),
                               ],
                             ),
@@ -303,9 +299,9 @@ class FeaturedProductsState extends State<FeaturedProducts> {
                   ),
                 ],
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

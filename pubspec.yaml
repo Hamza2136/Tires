@@ -15,6 +15,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  dotted_border: ^2.0.0
 
 flutter:
   uses-material-design: true
@@ -62,6 +63,13 @@ flutter:
     - images/featuredproducts/2.png
     - images/featuredproducts/3.png
     - images/featuredproducts/4.png
+    - images/payment/visa.png
+    - images/payment/master.png
+    - images/payment/american.png
+    - images/payment/discover.png
+    - images/payment/success.png
+    - images/notification/bag.png
+    - images/notification/tag.png
 
 
 

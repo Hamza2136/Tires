@@ -75,15 +75,12 @@ class TireWheelsState extends State<TireWheels> {
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned(
-            top: 20,
-            right: 20,
-            left: 20,
-            bottom: 20,
-            child: SingleChildScrollView(
-              child: Align(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Align(
                 alignment: Alignment.center,
                 child: Column(
                   children: [
@@ -118,8 +115,8 @@ class TireWheelsState extends State<TireWheels> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        const Spacer(
+                          flex: 2,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -186,8 +183,8 @@ class TireWheelsState extends State<TireWheels> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        const Spacer(
+                          flex: 2,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -224,9 +221,9 @@ class TireWheelsState extends State<TireWheels> {
                   ],
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
