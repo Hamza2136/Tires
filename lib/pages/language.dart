@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:tires/pages/walkthroug.dart';
+import 'package:tires/pages/login.dart';
 
 // ignore: must_be_immutable
 class SelectLanguage extends StatelessWidget {
@@ -47,31 +47,33 @@ class SelectLanguage extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                Row(
-                  children: [
-                    // Image positioned at the start with some spacing
-                    Image.asset('images/english_flag@2x.png'),
-                    const Spacer(flex: 1), // Flexible spacer for even spacing
-
-                    // Text positioned in the middle
-                    const Text(
-                      'English',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Signin(),
                       ),
-                    ),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      // Image positioned at the start with some spacing
+                      Image.asset('images/english_flag@2x.png'),
+                      const Spacer(flex: 1), // Flexible spacer for even spacing
 
-                    const Spacer(flex: 2),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Walkthrough()));
-                      },
-                      child: Container(
+                      // Text positioned in the middle
+                      const Text(
+                        'English',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+
+                      const Spacer(flex: 2),
+                      Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: myColor,
@@ -84,31 +86,31 @@ class SelectLanguage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 40),
-                Row(
-                  children: [
-                    Image.asset('images/arabic_flag@2x.png'),
-                    const Spacer(flex: 1),
-                    const Text(
-                      'عربي',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Signin()));
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset('images/arabic_flag@2x.png'),
+                      const Spacer(flex: 1),
+                      const Text(
+                        'عربي',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const Spacer(flex: 2),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Walkthrough()));
-                      },
-                      child: Container(
+                      const Spacer(flex: 2),
+                      Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: myColor,
@@ -121,9 +123,9 @@ class SelectLanguage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                )
+                    ],
+                  ),
+                ),
               ],
             ),
           ],

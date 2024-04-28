@@ -1,12 +1,16 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, avoid_print
+import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:tires/pages/feature_product_details.dart';
+import 'package:tires/pages/product_details.dart';
+import 'package:http/http.dart' as http;
+import 'package:tires/url/url.dart';
 
 class FeaturedProducts extends StatefulWidget {
-  const FeaturedProducts({super.key});
-
+  final int userId;
+  const FeaturedProducts({super.key, required this.userId});
   @override
   State<StatefulWidget> createState() {
     return FeaturedProductsState();
@@ -14,20 +18,28 @@ class FeaturedProducts extends StatefulWidget {
 }
 
 class FeaturedProductsState extends State<FeaturedProducts> {
-  Widget tempPrice() {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width - 210,
-      child: Text(
-        'RS 34000',
-        textAlign: TextAlign.start,
-        style: TextStyle(
-          color: HexColor('#D32F2F'),
-          fontFamily: 'Montserrat',
-          fontWeight: FontWeight.w600,
-          fontSize: 16,
-        ),
-      ),
-    );
+  int userId = 0;
+  @override
+  void initState() {
+    fetchFeaturedProducts();
+    super.initState();
+    userId = widget.userId;
+  }
+
+  List<dynamic> products = [];
+  Future<void> fetchFeaturedProducts() async {
+    try {
+      var response = await http.get(Uri.parse('$url/Products/all'));
+      if (response.statusCode == 200) {
+        setState(() {
+          products = jsonDecode(response.body);
+        });
+      } else {
+        print('Failed to load Products: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching Products: $e');
+    }
   }
 
   @override
@@ -75,233 +87,94 @@ class FeaturedProductsState extends State<FeaturedProducts> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromARGB(255, 255, 237, 237),
-                      width: 1.0),
-                  borderRadius: BorderRadius.circular(8.0), // Customize border
-                  color: const Color.fromARGB(255, 255, 237, 237),
-                ),
-                padding: const EdgeInsets.all(16.0), // Add padding for spacing
+      body: ListView.builder(
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          return SingleChildScrollView(
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Honda',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        decorationColor: HexColor('#D32F2F'),
-                        decorationThickness: 3,
-                        fontSize: 16.0,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        color: HexColor('#1A237E'),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductDetails(
+                              path: products[index]['ImageUrl'],
+                              title: products[index]['ProductName'],
+                              price: products[index]['ProductPrice'],
+                              description: products[index]
+                                  ['ProductDescription'],
+                              productId: products[index]['ProductId'],
+                              userId: userId,
+                            ),
+                          ),
+                        );
+                      },
+                      child: CachedNetworkImage(
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        imageUrl: products[index]['ImageUrl'],
+                        imageBuilder: (context, imageProvider) {
+                          return Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.fill),
+                            ),
+                          );
+                        },
                       ),
                     ),
-                    Text(
-                      'Audi',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        color: HexColor('#1A237E'),
-                      ),
+                    const Spacer(
+                      flex: 2,
                     ),
-                    Text(
-                      'Mercedez',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        color: HexColor('#1A237E'),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width - 170,
+                            child: Text(
+                              '${products[index]['ProductName']}',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                color: HexColor('#1A237E'),
+                                fontFamily: 'Montserrat',
+                                overflow: TextOverflow.clip,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20.0),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width - 210,
+                            child: Text(
+                              'RS ${products[index]['ProductPrice']}',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                color: HexColor('#D32F2F'),
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-              Column(
-                children: [
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ProductDetails(
-                                      path: 'images/tiresandwheels/1.png',
-                                      title: 'Jeep BF Goodrich Tires',
-                                      price: 'RS 34000'),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: 100,
-                              width: 100,
-                              child: Image.asset('images/tiresandwheels/1.png'),
-                            ),
-                          ),
-                          const Spacer(
-                            flex: 2,
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width - 170,
-                                  child: Text(
-                                    'Jeep BF Goodrich Tires',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      color: HexColor('#1A237E'),
-                                      fontFamily: 'Montserrat',
-                                      overflow: TextOverflow.clip,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 20.0),
-                                tempPrice(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ProductDetails(
-                                      path: 'images/tiresandwheels/2.png',
-                                      title:
-                                          'RT Off-Road Jeep Accessories & Parts',
-                                      price: 'RS 34000'),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: 100,
-                              width: 100,
-                              child: Image.asset('images/tiresandwheels/2.png'),
-                            ),
-                          ),
-                          const Spacer(
-                            flex: 2,
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width - 170,
-                                  child: Text(
-                                    'RT Off-Road Jeep Accessories & Parts',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      color: HexColor('#1A237E'),
-                                      fontFamily: 'Montserrat',
-                                      overflow: TextOverflow.clip,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 20.0),
-                                tempPrice(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ProductDetails(
-                                      path: 'images/tiresandwheels/3.png',
-                                      title:
-                                          'Jeep Rubicon Express Suspension Parts & Accessories',
-                                      price: 'RS 34000'),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: 100,
-                              width: 100,
-                              child: Image.asset('images/tiresandwheels/3.png'),
-                            ),
-                          ),
-                          const Spacer(
-                            flex: 2,
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width - 170,
-                                  child: Text(
-                                    'Jeep Rubicon Express Suspension Parts & Accessories',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      color: HexColor('#1A237E'),
-                                      fontFamily: 'Montserrat',
-                                      overflow: TextOverflow.clip,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 20.0),
-                                tempPrice(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

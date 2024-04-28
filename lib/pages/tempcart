@@ -1,0 +1,33 @@
+ // Future<void> addToCart(BuildContext context) async {
+  //   try {
+  //     var response = await http.post(
+  //       Uri.parse('$url/Cart/add'),
+  //       body: jsonEncode(
+  //         {
+  //           'ProductId': productId,
+  //           'UserId': userId,
+  //           'Count': int.parse(itemController.text),
+  //           'ProductName': gtitle,
+  //           'ProductPrice': gprice,
+  //           'ImageUrl': gpath,
+  //         },
+  //       ),
+  //       headers: {'Content-Type': 'application/json'},
+  //     );
+  //     if (response.statusCode == 201) {
+  //       debugPrint('item added to cart successfully');
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => Home(
+  //             userId: userId,
+  //           ),
+  //         ),
+  //       );
+  //     } else {
+  //       debugPrint('Failed to create user: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     debugPrint('$e');
+  //   }
+  // }

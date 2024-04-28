@@ -3,7 +3,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:tires/pages/shopping_cart.dart';
 
 class MyOrders extends StatefulWidget {
   const MyOrders({super.key});
@@ -79,14 +78,14 @@ class MyOrdersState extends State<MyOrders> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Cart(),
-                        ),
-                      );
-                    },
+                    // onTap: () {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const Cart(),
+                    //     ),
+                    //   );
+                    // },
                     child: Card(
                       color: const Color.fromARGB(255, 205, 204, 202),
                       child: Padding(

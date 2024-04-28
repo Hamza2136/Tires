@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiresBackend", "TiresBackend\TiresBackend.csproj", "{6E6C4D61-7326-4D49-A1B0-09D95C504326}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E6C4D61-7326-4D49-A1B0-09D95C504326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E6C4D61-7326-4D49-A1B0-09D95C504326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E6C4D61-7326-4D49-A1B0-09D95C504326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E6C4D61-7326-4D49-A1B0-09D95C504326}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6472DD6-FA44-49CF-A943-32D48B48E66D}
+	EndGlobalSection
+EndGlobal

@@ -101,7 +101,9 @@ class ResetPasswordState extends State<ResetPassword> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Home()));
+                                builder: (context) => const Home(
+                                      userId: 0,
+                                    )));
                         showSnackbar(context, 'Password Change Successfully');
                       } else {
                         showSnackbar(context, 'Password does not match');

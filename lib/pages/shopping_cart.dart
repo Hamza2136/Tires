@@ -1,12 +1,23 @@
 // ignore: file_names
-// ignore_for_file: sized_box_for_whitespace, file_names, duplicate_ignore, non_constant_identifier_names
+// ignore_for_file: sized_box_for_whitespace, file_names, duplicate_ignore, non_constant_identifier_names, avoid_print
 
+import 'dart:convert';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tires/pages/address.dart';
+import 'package:tires/pages/home.dart';
+import 'package:tires/url/url.dart';
+import 'package:http/http.dart' as http;
 
 class Cart extends StatefulWidget {
-  const Cart({super.key});
+  final int UserId;
+
+  const Cart({
+    super.key,
+    required this.UserId,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -15,135 +26,101 @@ class Cart extends StatefulWidget {
 }
 
 class CartState extends State<Cart> {
-  int item_Count = 0;
-  Widget cardDemo() {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 100,
-              width: 100,
-              child: Image.asset('images/tiresandwheels/1.png'),
-            ),
-            const Spacer(
-              flex: 1,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 220,
-                  child: Text(
-                    'Jeep BF Goodrich Tires',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: HexColor('#1A237E'),
-                      fontFamily: 'Montserrat',
-                      overflow: TextOverflow.clip,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-                Text(
-                  'RS 34000',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    color: HexColor('#D32F2F'),
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      item_Count = 0;
-                    });
-                  },
-                  child: Text(
-                    'Delete',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: HexColor('#1A237E'),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const Spacer(
-              flex: 1,
-            ),
-            Column(
-              children: [
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      item_Count += 1;
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: HexColor('#1A237E'),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Icon(
-                        Icons.keyboard_arrow_up,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                Text(
-                  '$item_Count',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: HexColor('#1A237E'),
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      if (item_Count >= 1) {
-                        item_Count -= 1;
-                      }
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: HexColor('#1A237E'),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+  var item_Count = 0;
+  int userId = 0;
+  int discountAmount = 0;
+  var items = [];
+  int totalAmount = 0;
+  bool discountApplied = false;
+  @override
+  void initState() {
+    super.initState();
+    userId = widget.UserId;
+    fetchItems();
+  }
+
+  Future<void> fetchItems() async {
+    try {
+      var response = await http.get(Uri.parse('$url/cart/uid/$userId'));
+      if (response.statusCode == 200) {
+        setState(() {
+          items = jsonDecode(response.body);
+          item_Count = items.length;
+          calculateTotalAmount();
+        });
+      } else {
+        print('No items Found');
+      }
+    } catch (e) {
+      print('Error fetching items: $e');
+    }
+  }
+
+  Future<void> incrementItem(int cartId) async {
+    try {
+      var response = await http.put(Uri.parse('$url/cart/increment/$cartId'));
+      if (response.statusCode == 200) {
+        setState(() {
+          fetchItems();
+          calculateTotalAmount();
+        });
+      } else {
+        print('Failed to Increment item: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error Incrementing item: $e');
+    }
+  }
+
+  Future<void> decrementItem(int cartId) async {
+    try {
+      var response = await http.put(Uri.parse('$url/cart/decrement/$cartId'));
+      if (response.statusCode == 200) {
+        setState(() {
+          fetchItems();
+          calculateTotalAmount();
+        });
+      } else {
+        print('Failed to Decrement item: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error Decrementing item: $e');
+    }
+  }
+
+  Future<void> deleteItem(int cartId) async {
+    try {
+      var response = await http.delete(Uri.parse('$url/cart/delete/$cartId'));
+      if (response.statusCode == 204) {
+        setState(() {
+          fetchItems();
+          calculateTotalAmount();
+        });
+      } else {
+        print('Failed to Delete item: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error Deleting item: $e');
+    }
+  }
+
+  void calculateTotalAmount() {
+    totalAmount = 0;
+    for (var item in items) {
+      totalAmount += item['Count'] * item['ProductPrice'] as int;
+    }
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   TextEditingController couponController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     double buttonWidth = screenWidth * 0.3;
     double fieldWidth = screenWidth * 0.5;
     return Scaffold(
@@ -203,8 +180,168 @@ class CartState extends State<Cart> {
               ),
               Column(
                 children: [
-                  cardDemo(),
-                  cardDemo(),
+                  Container(
+                    height: screenHeight * 0.45,
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 100,
+                                  width: 100,
+                                  child: CachedNetworkImage(
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    imageUrl: items[index]['ImageUrl'],
+                                    imageBuilder: (context, imageProvider) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.fill)),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                const Spacer(
+                                  flex: 1,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          220,
+                                      child: Text(
+                                        items[index]['ProductName'],
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          color: HexColor('#1A237E'),
+                                          fontFamily: 'Montserrat',
+                                          overflow: TextOverflow.clip,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      'Each: ${items[index]['ProductPrice']}',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        color: HexColor('#D32F2F'),
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Total: ${items[index]['Count'] * items[index]['ProductPrice']}',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        color: HexColor('#D32F2F'),
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          deleteItem(items[index]['CartId']);
+                                          if (items.length <= 1) {
+                                            _showSnackBar(
+                                                context, 'No item in Cart');
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Home(userId: userId),
+                                              ),
+                                            );
+                                          }
+                                        });
+                                      },
+                                      child: Text(
+                                        'Delete',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: HexColor('#1A237E'),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(
+                                  flex: 1,
+                                ),
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          incrementItem(items[index]['CartId']);
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: HexColor('#1A237E'),
+                                        ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Icon(
+                                            Icons.keyboard_arrow_up,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${items[index]['Count']}',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: HexColor('#1A237E'),
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          decrementItem(items[index]['CartId']);
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: HexColor('#1A237E'),
+                                        ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Icon(
+                                            Icons.keyboard_arrow_down,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
                 ],
               ),
               const SizedBox(
@@ -242,13 +379,25 @@ class CartState extends State<Cart> {
                     height: 50,
                     width: buttonWidth,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          if (couponController.text.isNotEmpty &&
+                              !discountApplied) {
+                            if (int.parse(couponController.text) == 4000) {
+                              discountAmount = 1000;
+                              totalAmount = totalAmount - discountAmount;
+                              discountApplied = true;
+                            } else {
+                              discountAmount = 0;
+                            }
+                          }
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: HexColor('#1A237E'),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              0), // Set border radius to 0 for a square button
+                          borderRadius: BorderRadius.circular(0),
                         ),
                       ),
                       child: const Text(
@@ -256,7 +405,7 @@ class CartState extends State<Cart> {
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w600,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                     ),
@@ -281,7 +430,7 @@ class CartState extends State<Cart> {
                     flex: 2,
                   ),
                   Text(
-                    'RS 200',
+                    'RS $discountAmount',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 18,
@@ -309,7 +458,7 @@ class CartState extends State<Cart> {
                     flex: 2,
                   ),
                   Text(
-                    'RS 33800',
+                    'RS $totalAmount',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 20,

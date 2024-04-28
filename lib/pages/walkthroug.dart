@@ -45,7 +45,7 @@ class _Walkthrough extends State<Walkthrough> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double imageHeight = screenHeight * 0.7;
+    double imageHeight = screenHeight * 0.65;
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -54,7 +54,7 @@ class _Walkthrough extends State<Walkthrough> {
           child: Column(
             children: [
               const SizedBox(
-                height: 20,
+                height: 30,
               ),
               const SizedBox(
                 // width: MediaQuery.of(context).size.width - 180,
@@ -108,8 +108,6 @@ class _Walkthrough extends State<Walkthrough> {
                         debugPrint('<');
                         if (current > 1) {
                           current -= 1;
-                        } else if (current == 1) {
-                          current = 1;
                         }
                       });
                     },

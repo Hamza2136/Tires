@@ -66,7 +66,9 @@ class OrderSuccessState extends State<OrderSuccess> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Home(),
+                        builder: (context) => const Home(
+                          userId: 0,
+                        ),
                       ),
                     );
                   },
