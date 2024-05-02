@@ -1,10 +1,13 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+// import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:tires/pages/language.dart';
 import 'package:tires/pages/splashScreen.dart';
 
 void main() {
+  // Stripe.publishableKey =
+  //     'pk_test_51OGFN1SAZsydKziUe64jUPojsqbLrq8HIDUWSCbd8As9KQobLz0LGPBDVskSYHJooo3xUV7oBnqg4UcS4KLZWbfd00eE6NNsR7';
   runApp(const MyApp());
 }
 

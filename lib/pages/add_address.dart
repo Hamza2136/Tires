@@ -1,11 +1,17 @@
 // ignore: file_names
-// ignore_for_file: sized_box_for_whitespace, file_names, duplicate_ignore, depend_on_referenced_packages
+// ignore_for_file: sized_box_for_whitespace, file_names, duplicate_ignore, depend_on_referenced_packages, non_constant_identifier_names
+
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:http/http.dart' as http;
+import 'package:tires/pages/address.dart';
+import 'package:tires/url/url.dart';
 
 class AddAddress extends StatefulWidget {
-  const AddAddress({super.key});
+  final int userId;
+  const AddAddress({super.key, required this.userId});
 
   @override
   State<StatefulWidget> createState() {
@@ -14,14 +20,21 @@ class AddAddress extends StatefulWidget {
 }
 
 class AddAddressState extends State<AddAddress> {
+  int userId = 0;
+  @override
+  void initState() {
+    super.initState();
+    userId = widget.userId;
+  }
+
   TextStyle fieldStyle = const TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w400,
     fontSize: 14,
   );
   TextEditingController nameController = TextEditingController();
-  TextEditingController laneController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController areaController = TextEditingController();
   TextEditingController zipCodeController = TextEditingController();
   TextEditingController phoneNoController = TextEditingController();
   @override
@@ -70,9 +83,9 @@ class AddAddressState extends State<AddAddress> {
                 height: 20,
               ),
               TextField(
-                controller: laneController,
+                controller: addressController,
                 decoration: InputDecoration(
-                  labelText: 'Address Lane', // Changed label to labelText
+                  labelText: 'Address',
                   labelStyle: fieldStyle,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
@@ -84,9 +97,9 @@ class AddAddressState extends State<AddAddress> {
                 height: 20,
               ),
               TextField(
-                controller: cityController,
+                controller: areaController,
                 decoration: InputDecoration(
-                  labelText: 'City', // Changed label to labelText
+                  labelText: 'Area', // Changed label to labelText
                   labelStyle: fieldStyle,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
@@ -129,13 +142,21 @@ class AddAddressState extends State<AddAddress> {
                 height: 50,
                 width: buttonWidth,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    addnewAddress(
+                      context,
+                      nameController.text,
+                      addressController.text,
+                      areaController.text,
+                      int.parse(zipCodeController.text),
+                      int.parse(phoneNoController.text),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('#1A237E'),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          0), // Set border radius to 0 for a square button
+                      borderRadius: BorderRadius.circular(0),
                     ),
                   ),
                   child: const Text(
@@ -153,5 +174,42 @@ class AddAddressState extends State<AddAddress> {
         ),
       ),
     );
+  }
+
+  Future<void> addnewAddress(BuildContext context, String name, String address,
+      String Area, int zipCode, int phoneNumber) async {
+    try {
+      var response = await http.post(
+        Uri.parse('$url/Address/add'),
+        body: jsonEncode({
+          'Name': name,
+          'UserId': userId,
+          'CompleteAddress': address,
+          'Area': Area,
+          'PostalCode': zipCode,
+          'PhoneNumber': phoneNumber,
+        }),
+        headers: {'Content-Type': 'application/json'},
+      );
+      if (response.statusCode == 201) {
+        debugPrint('Address Added Successfully');
+        setState(
+          () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Address(
+                  userId: userId,
+                ),
+              ),
+            );
+          },
+        );
+      } else {
+        debugPrint('Failed to Add Address: ${response.body}');
+      }
+    } catch (e) {
+      debugPrint('$e');
+    }
   }
 }

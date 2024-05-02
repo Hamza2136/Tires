@@ -19,5 +19,6 @@ namespace TiresBackend_DBContext.Data
         public DbSet<AccountModel> UserAccount { get; set; }
         public DbSet<ProductModel> Products { get; set; }
         public DbSet<CartModel> Cart { get; set; }
+        public DbSet<AddressModel> Address { get; set; }
     }
 }

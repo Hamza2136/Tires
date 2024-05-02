@@ -19,6 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IAccounts, AccountsService>();
 builder.Services.AddScoped<IProducts, ProductsService>();
 builder.Services.AddScoped<ICart, CartService>();
+builder.Services.AddScoped<IAddress, AddressService>();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = null;

@@ -1,14 +1,19 @@
 // ignore: file_names
-// ignore_for_file: sized_box_for_whitespace, file_names, duplicate_ignore, depend_on_referenced_packages
+// ignore_for_file: sized_box_for_whitespace, file_names, duplicate_ignore, depend_on_referenced_packages, avoid_print
+
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:tires/pages/add_address.dart';
 import 'package:tires/pages/payment.dart';
+import 'package:http/http.dart' as http;
+import 'package:tires/url/url.dart';
 
 class Address extends StatefulWidget {
-  const Address({super.key});
+  final int userId;
+  const Address({super.key, required this.userId});
 
   @override
   State<StatefulWidget> createState() {
@@ -17,11 +22,36 @@ class Address extends StatefulWidget {
 }
 
 class AddressState extends State<Address> {
-  String selectedAddress = 'address1';
+  int? selectedAddressIndex;
+  var addresses = [];
+  int userId = 0;
+  @override
+  void initState() {
+    super.initState();
+    userId = widget.userId;
+    fetchAddresses();
+  }
+
+  Future<void> fetchAddresses() async {
+    try {
+      var response = await http.get(Uri.parse('$url/address/uid/$userId'));
+      if (response.statusCode == 200) {
+        setState(() {
+          addresses = jsonDecode(response.body);
+        });
+      } else {
+        print('No Address Found');
+      }
+    } catch (e) {
+      print('Error fetching items: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double buttonWidth = screenWidth * 0.9;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -46,64 +76,43 @@ class AddressState extends State<Address> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Column(
-                children: [
-                  Card(
-                    child: RadioListTile(
-                      activeColor: HexColor('#1A237E'),
-                      value: 'address1',
-                      groupValue: selectedAddress,
-                      title: const Text(
-                        'Hamza Abid',
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
+              Container(
+                height: screenHeight * 0.45,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: addresses.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: RadioListTile(
+                        activeColor: HexColor('#1A237E'),
+                        value: index,
+                        groupValue: selectedAddressIndex,
+                        title: Text(
+                          addresses[index]['Name'],
+                          style: const TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        subtitle: Text(
+                          '${addresses[index]['PhoneNumber']} \n${addresses[index]['CompleteAddress']} \n${addresses[index]['Area']}',
+                          style: const TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedAddressIndex = value;
+                          });
+                        },
                       ),
-                      subtitle: const Text(
-                        '03317541395\nChak No 3/Gajiyani Tehsil Chishtian District Bahawalnagar',
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedAddress = value.toString();
-                        });
-                      },
-                    ),
-                  ),
-                  Card(
-                    child: RadioListTile(
-                      activeColor: HexColor('#1A237E'),
-                      value: 'address2',
-                      groupValue: selectedAddress,
-                      title: const Text(
-                        'Ahmer Abid',
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      subtitle: const Text(
-                        '03437172680\nChak No 13/Gajiyani Tehsil Chishtian District Bahawalnagar',
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedAddress = value.toString();
-                        });
-                      },
-                    ),
-                  ),
-                ],
+                    );
+                  },
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -119,7 +128,9 @@ class AddressState extends State<Address> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AddAddress(),
+                          builder: (context) => AddAddress(
+                            userId: userId,
+                          ),
                         ),
                       );
                     },
@@ -167,8 +178,7 @@ class AddressState extends State<Address> {
                     backgroundColor: HexColor('#1A237E'),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          0), // Set border radius to 0 for a square button
+                      borderRadius: BorderRadius.circular(0),
                     ),
                   ),
                   child: const Text(

@@ -1,23 +1,74 @@
 // ignore: file_names
 // ignore_for_file: sized_box_for_whitespace, file_names, duplicate_ignore, depend_on_referenced_packages
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+// import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:tires/pages/add_card.dart';
 import 'package:tires/pages/successpayment.dart';
+import 'package:http/http.dart' as http;
 
 class Payment extends StatefulWidget {
-  const Payment({super.key});
+  const Payment({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return PaymentState();
-  }
+  State<StatefulWidget> createState() => PaymentState();
 }
 
 class PaymentState extends State<Payment> {
-  String selectedPaymentMethod = 'method1';
+  // Future<Map<String, dynamic>>? paymentIntent;
+
+  // Future<Map<String, dynamic>> createPaymentIntent() async {
+  //   try {
+  //     Map<String, dynamic> body = {"amount": "10000", "currency": "USD"};
+  //     http.Response response = await http.post(
+  //       Uri.parse('https://api.stripe.com/v1/payment_intents'),
+  //       body: body,
+  //       headers: {
+  //         'Authorization':
+  //             'Bearer sk_test_51OGFN1SAZsydKziU5fD5gqnlwkdxwSvP8HpLdJNdSXdhaxG7lgDiSnPT79ngDpyDChhESgCPUzyqTtCE7YG9LUss00osWz0fWt',
+  //         'Content-type': 'application/x-www-form-urlencoded',
+  //       },
+  //     );
+  //     return json.decode(response.body);
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return {};
+  //   }
+  // }
+
+  // void makePayment() async {
+  //   try {
+  //     paymentIntent = createPaymentIntent();
+  //     var gpay = const PaymentSheetGooglePay(
+  //       merchantCountryCode: "US",
+  //       currencyCode: "USD",
+  //       testEnv: true,
+  //     );
+  //     await Stripe.instance.initPaymentSheet(
+  //       paymentSheetParameters: SetupPaymentSheetParameters(
+  //         paymentIntentClientSecret: (await paymentIntent)!["client_secret"],
+  //         style: ThemeMode.dark,
+  //         merchantDisplayName: "Hamza",
+  //         googlePay: gpay,
+  //       ),
+  //     );
+  //     displayPaymentSheet();
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
+
+  // displayPaymentSheet() async {
+  //   try {
+  //     await Stripe.instance.presentPaymentSheet();
+  //     print('Done');
+  //   } catch (e) {
+  //     print('Failed');
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -49,114 +100,104 @@ class PaymentState extends State<Payment> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              Column(
-                children: [
-                  Card(
-                    child: RadioListTile(
-                      activeColor: HexColor('#1A237E'),
-                      value: 'method1',
-                      groupValue: selectedPaymentMethod,
-                      secondary: Image.asset(
-                        'images/payment/visa.png',
-                        fit: BoxFit.cover,
-                      ),
-                      title: const Text(
-                        'Global',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      subtitle: const Text(
-                        '034x33535x34',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedPaymentMethod = value.toString();
-                        });
-                      },
+              SizedBox(
+                height: 50,
+                width: buttonWidth,
+                child: ElevatedButton(
+                  onPressed: () {
+                    print('hahhhahahha');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: HexColor('#F8F8F8'),
+                    foregroundColor: HexColor('#000000'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
                     ),
                   ),
-                  Card(
-                    child: RadioListTile(
-                      activeColor: HexColor('#1A237E'),
-                      value: 'method2',
-                      groupValue: selectedPaymentMethod,
-                      secondary: Image.asset(
-                        'images/payment/master.png',
-                        fit: BoxFit.cover,
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.payment_sharp),
+                      SizedBox(
+                        width: 10,
                       ),
-                      title: const Text(
-                        'Fast Cash',
+                      Text(
+                        'Payment With Stripe',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          fontSize: 15,
                           fontWeight: FontWeight.w600,
+                          fontSize: 16,
                         ),
                       ),
-                      subtitle: const Text(
-                        '034x33535x34',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedPaymentMethod = value.toString();
-                        });
-                      },
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
               const SizedBox(
                 height: 20,
               ),
-              DottedBorder(
-                color: Colors.black,
-                strokeWidth: 2,
-                child: SizedBox(
-                  height: 50,
-                  width: buttonWidth,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AddCard()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: HexColor('#F8F8F8'),
-                      foregroundColor: HexColor('#000000'),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
+              SizedBox(
+                height: 50,
+                width: buttonWidth,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: HexColor('#F8F8F8'),
+                    foregroundColor: HexColor('#000000'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.payment_sharp),
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.add),
-                        SizedBox(
-                          width: 10,
+                      Text(
+                        'Payment With EasyPaisa',
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
                         ),
-                        Text(
-                          'Add Card',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 50,
+                width: buttonWidth,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: HexColor('#F8F8F8'),
+                    foregroundColor: HexColor('#000000'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
                     ),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.payment_sharp),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'Payment With Jazz Cash',
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -253,16 +294,17 @@ class PaymentState extends State<Payment> {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const OrderSuccess()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrderSuccess(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('#1A237E'),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          0), // Set border radius to 0 for a square button
+                      borderRadius: BorderRadius.circular(0),
                     ),
                   ),
                   child: const Text(

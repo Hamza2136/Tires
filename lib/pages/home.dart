@@ -227,7 +227,9 @@ class HomeState extends State<Home> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const AddProduct(),
+                        builder: (context) => AddProduct(
+                          userId: userId,
+                        ),
                       ),
                     );
                   },

@@ -15,7 +15,8 @@ import 'package:http/http.dart' as http;
 // import 'package:path/path.dart' as path;
 
 class AddProduct extends StatefulWidget {
-  const AddProduct({super.key});
+  final int userId;
+  const AddProduct({super.key, required this.userId});
 
   @override
   State<StatefulWidget> createState() {
@@ -25,6 +26,13 @@ class AddProduct extends StatefulWidget {
 
 class AddProductState extends State<AddProduct> {
   File? _selectedImage;
+  int userId = 0;
+  @override
+  void initState() {
+    super.initState();
+    userId = widget.userId;
+  }
+
   TextStyle fieldStyle = const TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w400,
@@ -279,8 +287,8 @@ class AddProductState extends State<AddProduct> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const Home(
-                  userId: 0,
+                builder: (context) => Home(
+                  userId: userId, // needed to change
                 ),
               ),
             );

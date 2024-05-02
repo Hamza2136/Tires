@@ -477,16 +477,19 @@ class CartState extends State<Cart> {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Address()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Address(
+                          userId: userId,
+                        ),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('#1A237E'),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          0), // Set border radius to 0 for a square button
+                      borderRadius: BorderRadius.circular(0),
                     ),
                   ),
                   child: const Text(
