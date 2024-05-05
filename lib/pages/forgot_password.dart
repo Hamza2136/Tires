@@ -21,13 +21,25 @@ class ForgotPassState extends State<ForgotPass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: HexColor('#1A237E'),
+            size: 30,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
               const SizedBox(
-                height: 130,
+                height: 70,
               ),
               Image.asset('images/logo.png'),
               const SizedBox(

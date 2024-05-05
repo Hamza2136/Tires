@@ -1,14 +1,16 @@
-// ignore_for_file: sized_box_for_whitespace, avoid_print
+// ignore_for_file: sized_box_for_whitespace, avoid_print, use_build_context_synchronously
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tires/pages/SideBar/register_business.dart';
 import 'package:tires/pages/SideBar/setting.dart';
 import 'package:tires/pages/add_product.dart';
 import 'package:tires/pages/latest_product.dart';
+import 'package:tires/pages/login.dart';
 import 'package:tires/pages/product_details.dart';
 import 'package:tires/pages/featured_products.dart';
 import 'package:tires/pages/home_search_accessories.dart';
@@ -16,6 +18,7 @@ import 'package:tires/pages/home_search_fourXfour.dart';
 import 'package:tires/pages/SideBar/my_orders.dart';
 import 'package:tires/pages/search2.dart';
 import 'package:tires/pages/shopping_cart.dart';
+import 'package:tires/pages/walkthroug.dart';
 import 'package:tires/url/url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -53,6 +56,15 @@ class HomeState extends State<Home> {
     } catch (e) {
       print('Error fetching Products: $e');
     }
+  }
+
+  void goToPage(BuildContext context, pageName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => pageName,
+      ),
+    );
   }
 
   @override
@@ -93,34 +105,7 @@ class HomeState extends State<Home> {
                 ),
                 leading: const Icon(Icons.category_outlined),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterBusiness(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text(
-                  'Home',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    color: HexColor('#404F68'),
-                  ),
-                ),
-                leading: const Icon(Icons.home_outlined),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Home(
-                        userId: userId,
-                      ),
-                    ),
-                  );
+                  goToPage(context, const RegisterBusiness());
                 },
               ),
               ListTile(
@@ -148,14 +133,7 @@ class HomeState extends State<Home> {
                 ),
                 leading: const Icon(Icons.shopping_bag_outlined),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Cart(
-                        UserId: userId,
-                      ),
-                    ),
-                  );
+                  goToPage(context, Cart(UserId: userId));
                 },
               ),
               ListTile(
@@ -183,12 +161,7 @@ class HomeState extends State<Home> {
                 ),
                 leading: const Icon(Icons.fact_check_outlined),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MyOrders(),
-                    ),
-                  );
+                  goToPage(context, const MyOrders());
                 },
               ),
               ListTile(
@@ -203,12 +176,24 @@ class HomeState extends State<Home> {
                 ),
                 leading: const Icon(Icons.settings),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ShowSettings(),
-                    ),
-                  );
+                  goToPage(context, const ShowSettings());
+                },
+              ),
+              ListTile(
+                title: Text(
+                  'Get Started',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: HexColor('#404F68'),
+                  ),
+                ),
+                leading: const Icon(Icons.start),
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.setBool('showLogin', false);
+                  goToPage(context, const WalkThrough());
                 },
               ),
               if (isAdmin)
@@ -224,14 +209,7 @@ class HomeState extends State<Home> {
                   ),
                   leading: const Icon(Icons.add_circle),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddProduct(
-                          userId: userId,
-                        ),
-                      ),
-                    );
+                    goToPage(context, AddProduct(userId: userId));
                   },
                 ),
               Text(userId.toString()),
@@ -268,14 +246,17 @@ class HomeState extends State<Home> {
                 size: 30,
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Cart(
-                      UserId: userId,
-                    ),
-                  ),
-                );
+                goToPage(context, Cart(UserId: userId));
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: HexColor('#1A237E'),
+                size: 30,
+              ),
+              onPressed: () async {
+                goToPage(context, const Signin());
               },
             ),
           ],
@@ -287,10 +268,7 @@ class HomeState extends State<Home> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Search()));
+                    goToPage(context, const Search());
                   },
                   child: Container(
                     height: 45,
@@ -367,17 +345,14 @@ class HomeState extends State<Home> {
                                 width: 140,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HomeSearchFourXFour()));
+                                    goToPage(
+                                        context, const HomeSearchFourXFour());
                                   },
                                   style: ElevatedButton.styleFrom(
                                     foregroundColor: HexColor('#1A237E'),
                                     backgroundColor: Colors.white,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(0),
                                     ),
                                   ),
                                   child: Text(
@@ -437,17 +412,14 @@ class HomeState extends State<Home> {
                                 width: 140,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HomeSearchAccessories()));
+                                    goToPage(
+                                        context, const HomeSearchAccessories());
                                   },
                                   style: ElevatedButton.styleFrom(
                                     foregroundColor: HexColor('#1A237E'),
                                     backgroundColor: Colors.white,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(0),
                                     ),
                                   ),
                                   child: Text(
@@ -488,12 +460,7 @@ class HomeState extends State<Home> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FeaturedProducts(
-                                      userId: userId,
-                                    )));
+                        goToPage(context, FeaturedProducts(userId: userId));
                       },
                       child: Text(
                         'View all',
@@ -520,10 +487,9 @@ class HomeState extends State<Home> {
                         padding: const EdgeInsets.only(right: 10.0),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProductDetails(
+                            goToPage(
+                                context,
+                                ProductDetails(
                                   path: products[index]['ImageUrl'],
                                   title: products[index]['ProductName'],
                                   price: products[index]['ProductPrice'],
@@ -531,9 +497,7 @@ class HomeState extends State<Home> {
                                       ['ProductDescription'],
                                   productId: products[index]['ProductId'],
                                   userId: userId,
-                                ),
-                              ),
-                            );
+                                ));
                           },
                           child: Container(
                             height: 200,
@@ -579,12 +543,7 @@ class HomeState extends State<Home> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LatestProducts(
-                                      userId: userId,
-                                    )));
+                        goToPage(context, LatestProducts(userId: userId));
                       },
                       child: Text(
                         'View all',
@@ -611,18 +570,16 @@ class HomeState extends State<Home> {
                         padding: const EdgeInsets.only(right: 10.0),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.push(
+                            goToPage(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => ProductDetails(
-                                  path: products[index]['ImageUrl'],
-                                  title: products[index]['ProductName'],
-                                  price: products[index]['ProductPrice'],
-                                  description: products[index]
-                                      ['ProductDescription'],
-                                  productId: products[index]['ProductId'],
-                                  userId: userId,
-                                ),
+                              ProductDetails(
+                                path: products[index]['ImageUrl'],
+                                title: products[index]['ProductName'],
+                                price: products[index]['ProductPrice'],
+                                description: products[index]
+                                    ['ProductDescription'],
+                                productId: products[index]['ProductId'],
+                                userId: userId,
                               ),
                             );
                           },

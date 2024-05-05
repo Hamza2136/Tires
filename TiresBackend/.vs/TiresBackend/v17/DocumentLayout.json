@@ -3,23 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DESKTOP_PU57KNV/TiresX/True/SqlTable/dbo.UserAccount.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|c:\\users\\hamza abid\\onedrive\\desktop\\android development\\android\\tires\\tiresbackend\\tiresbackend\\controllers\\addresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|solutionrelative:tiresbackend\\controllers\\addresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\tiresbackend\\models\\addressmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|solutionrelative:tiresbackend\\models\\addressmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\tiresbackend\\services\\iaddress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|solutionrelative:tiresbackend\\services\\iaddress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\tiresbackend\\services\\addressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|solutionrelative:tiresbackend\\services\\addressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\tiresbackend\\models\\orderdetailsmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|solutionrelative:tiresbackend\\models\\orderdetailsmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\tiresbackend\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -32,6 +17,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\tiresbackend\\models\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|solutionrelative:tiresbackend\\models\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\tiresbackend\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|solutionrelative:tiresbackend\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\tiresbackend\\services\\icart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|solutionrelative:tiresbackend\\services\\icart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\tiresbackend\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E6C4D61-7326-4D49-A1B0-09D95C504326}|TiresBackend\\TiresBackend.csproj|solutionrelative:tiresbackend\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,97 +43,87 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "dbo.UserAccount [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/DESKTOP_PU57KNV/TiresX/True/SqlTable/dbo.UserAccount.sql",
-              "ToolTip": "dbo.UserAccount [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-04-30T08:26:20.021Z",
+              "Title": "OrderDetailsModel.cs",
+              "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Models\\OrderDetailsModel.cs",
+              "RelativeDocumentMoniker": "TiresBackend\\Models\\OrderDetailsModel.cs",
+              "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Models\\OrderDetailsModel.cs",
+              "RelativeToolTip": "TiresBackend\\Models\\OrderDetailsModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-03T11:54:16.674Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "OrderStatus.cs",
               "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Models\\OrderStatus.cs",
               "RelativeDocumentMoniker": "TiresBackend\\Models\\OrderStatus.cs",
               "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Models\\OrderStatus.cs",
               "RelativeToolTip": "TiresBackend\\Models\\OrderStatus.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAASAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T06:46:00.044Z"
+              "WhenOpened": "2024-05-03T11:40:12.435Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ICart.cs",
+              "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Services\\ICart.cs",
+              "RelativeDocumentMoniker": "TiresBackend\\Services\\ICart.cs",
+              "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Services\\ICart.cs",
+              "RelativeToolTip": "TiresBackend\\Services\\ICart.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-03T11:14:07.911Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "CartService.cs",
+              "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Services\\CartService.cs",
+              "RelativeDocumentMoniker": "TiresBackend\\Services\\CartService.cs",
+              "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Services\\CartService.cs",
+              "RelativeToolTip": "TiresBackend\\Services\\CartService.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAowCoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-03T11:08:20.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "TiresBackend\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Controllers\\CartController.cs",
+              "RelativeToolTip": "TiresBackend\\Controllers\\CartController.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAgwFQAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-03T11:00:32.451Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "OrderHeaderModel.cs",
               "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Models\\OrderHeaderModel.cs",
               "RelativeDocumentMoniker": "TiresBackend\\Models\\OrderHeaderModel.cs",
               "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Models\\OrderHeaderModel.cs",
               "RelativeToolTip": "TiresBackend\\Models\\OrderHeaderModel.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAACEAAAAiAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-30T06:40:11.169Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AddressController.cs",
-              "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Controllers\\AddressController.cs",
-              "RelativeDocumentMoniker": "TiresBackend\\Controllers\\AddressController.cs",
-              "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Controllers\\AddressController.cs",
-              "RelativeToolTip": "TiresBackend\\Controllers\\AddressController.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAiwEoAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T12:38:32.793Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "TiresBackend\\Data\\ApplicationDbContext.cs",
               "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "TiresBackend\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAmAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-29T12:34:58.23Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AddressService.cs",
-              "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Services\\AddressService.cs",
-              "RelativeDocumentMoniker": "TiresBackend\\Services\\AddressService.cs",
-              "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Services\\AddressService.cs",
-              "RelativeToolTip": "TiresBackend\\Services\\AddressService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADEAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T12:33:43.968Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IAddress.cs",
-              "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Services\\IAddress.cs",
-              "RelativeDocumentMoniker": "TiresBackend\\Services\\IAddress.cs",
-              "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Services\\IAddress.cs",
-              "RelativeToolTip": "TiresBackend\\Services\\IAddress.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T12:31:42.492Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AddressModel.cs",
-              "DocumentMoniker": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Models\\AddressModel.cs",
-              "RelativeDocumentMoniker": "TiresBackend\\Models\\AddressModel.cs",
-              "ToolTip": "C:\\Users\\Hamza Abid\\OneDrive\\Desktop\\Android Development\\Android\\tires\\TiresBackend\\TiresBackend\\Models\\AddressModel.cs",
-              "RelativeToolTip": "TiresBackend\\Models\\AddressModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T12:29:27.098Z"
             }
           ]
         }

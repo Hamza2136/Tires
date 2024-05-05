@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TiresBackend.Models;
 using TiresBackend.Services.BusinessLogic;
 using TiresBackend_DBContext.Model;
@@ -79,6 +80,18 @@ namespace TiresBackend.Controllers
 
             await _cartRepository.DeleteItem(id);
 
+            return NoContent();
+        }
+        [HttpDelete("deleteuid/{uid}")]
+        public async Task<IActionResult> DeleteItemsWithUserId(int uid)
+        {
+            var itemsToDelete = await _cartRepository.GetItemsByUserId(uid);
+
+            if (itemsToDelete == null)
+            { 
+                return NotFound();
+            }
+            await _cartRepository.DeleteItemWithUid(uid);
             return NoContent();
         }
 

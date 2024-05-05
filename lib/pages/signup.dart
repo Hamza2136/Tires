@@ -34,6 +34,18 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: HexColor('#1A237E'),
+            size: 30,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
@@ -41,7 +53,7 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             children: [
               const SizedBox(
-                height: 130,
+                height: 65,
               ),
               Image.asset('images/logo.png'),
               const SizedBox(

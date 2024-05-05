@@ -6,8 +6,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:tires/pages/home.dart';
 
 class OrderSuccess extends StatefulWidget {
-  const OrderSuccess({super.key});
-
+  final int userId;
+  const OrderSuccess({super.key, required this.userId});
   @override
   State<StatefulWidget> createState() {
     return OrderSuccessState();
@@ -15,6 +15,13 @@ class OrderSuccess extends StatefulWidget {
 }
 
 class OrderSuccessState extends State<OrderSuccess> {
+  int userId = 0;
+  @override
+  void initState() {
+    super.initState();
+    userId = widget.userId;
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -66,8 +73,8 @@ class OrderSuccessState extends State<OrderSuccess> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Home(
-                          userId: 0,
+                        builder: (context) => Home(
+                          userId: userId,
                         ),
                       ),
                     );

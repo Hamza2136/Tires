@@ -48,6 +48,15 @@ namespace TiresBackend.Services.BusinessLogic
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task DeleteItemWithUid(int uid)
+        {
+            var itemsToDelete = await _context.Cart.Where(c => c.UserId == uid).ToListAsync();
+            if (itemsToDelete != null)
+            {
+                _context.Cart.RemoveRange(itemsToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
         public async Task IncrementCartItem(int cartId)
         {
             var cartItem = await _context.Cart.FindAsync(cartId);

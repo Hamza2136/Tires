@@ -20,6 +20,15 @@ class Signin extends StatefulWidget {
 }
 
 class SigninState extends State<Signin> {
+  void goToPage(BuildContext context, pageName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => pageName,
+      ),
+    );
+  }
+
   int userid = 0;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -141,10 +150,7 @@ class SigninState extends State<Signin> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ForgotPass()));
+                    goToPage(context, const ForgotPass());
                   },
                   child: Text(
                     'Forgot your password?',
@@ -162,11 +168,7 @@ class SigninState extends State<Signin> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignUp()));
-                    debugPrint('Register Pressed');
+                    goToPage(context, const SignUp());
                   },
                   child: const Text(
                     'Register >',
@@ -182,32 +184,6 @@ class SigninState extends State<Signin> {
                 const SizedBox(
                   height: 40,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.end,
-                //   children: [
-                //     GestureDetector(
-                //       onTap: () {
-                //         Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => Home(
-                //               userId: Userid,
-                //             ),
-                //           ),
-                //         );
-                //       },
-                //       child: Text(
-                //         'Skip >',
-                //         style: TextStyle(
-                //           color: myColor,
-                //           fontFamily: 'Montserrat',
-                //           fontSize: 18,
-                //           fontWeight: FontWeight.w600,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // )
               ],
             ),
           ),
@@ -228,14 +204,7 @@ class SigninState extends State<Signin> {
         var userData = jsonDecode(response.body);
         userid = userData['UserId'];
         if (userData['Password'] == password) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Home(
-                userId: userid,
-              ),
-            ),
-          );
+          goToPage(context, Home(userId: userid));
         } else {
           setState(() {
             incorrectPasswordError = "Password is incorrect";

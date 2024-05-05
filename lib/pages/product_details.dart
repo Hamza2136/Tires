@@ -199,8 +199,6 @@ class ProductDetailsState extends State<ProductDetails> {
         setState(() {
           items = jsonDecode(response.body);
         });
-      } else {
-        print('Failed to load items: ${response.statusCode}');
       }
     } catch (e) {
       print('Error fetching items: $e');

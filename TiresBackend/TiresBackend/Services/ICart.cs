@@ -15,6 +15,7 @@ namespace TiresBackend_DBContext.Services.Contract
         Task AddItem(CartModel newCart);
         Task UpdateItem(CartModel updatedCart);
         Task DeleteItem(int id);
+        Task DeleteItemWithUid(int uid);
         Task DecrementCartItem(int cartId);
         Task IncrementCartItem(int cartId);
     }

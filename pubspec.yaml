@@ -17,6 +17,17 @@ dependencies:
   path: ^1.9.0
   permission_handler: ^10.2.0
   cached_network_image: ^3.2.1
+  flutter_stripe: ^10.1.1
+  flutter_dotenv: ^5.1.0
+  flutter_launcher_icons: ^0.13.1
+  smooth_page_indicator: ^1.1.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "images/icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "images/foreground_icon.png"
 
 
 dev_dependencies:
@@ -28,6 +39,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - .env
+    - images/icon.png
     - images/logo.png
     - images/logo@2x.png
     - images/Icon@2x.png
@@ -35,13 +48,13 @@ flutter:
     - images/english_flag@2x.png
     - images/arabic_flag.png
     - images/arabic_flag@2x.png
-    - images/background.png
-    - images/background@2x.png
-    - images/background@3x.png
-    - images/bg1.png
-    - images/bg2.webp
-    - images/bg3.webp
-    - images/bg4.png
+    - images/walkthrough/bg1.jpeg
+    - images/walkthrough/bg2.jpeg
+    - images/walkthrough/bg3.jpeg
+    - images/walkthrough/bg4.jpeg
+    - images/walkthrough/bg5.jpeg
+    - images/walkthrough/bg6.jpeg
+    - images/walkthrough/bg7.jpeg
     - images/home/Alert.png
     - images/home/Alert@2x.png
     - images/home/alertdot.png

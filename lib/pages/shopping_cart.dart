@@ -6,8 +6,8 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:tires/pages/address.dart';
 import 'package:tires/pages/home.dart';
+import 'package:tires/pages/payment.dart';
 import 'package:tires/url/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,6 +32,7 @@ class CartState extends State<Cart> {
   var items = [];
   int totalAmount = 0;
   bool discountApplied = false;
+  int withoutDiscount = 0;
   @override
   void initState() {
     super.initState();
@@ -109,6 +110,7 @@ class CartState extends State<Cart> {
     for (var item in items) {
       totalAmount += item['Count'] * item['ProductPrice'] as int;
     }
+    withoutDiscount = totalAmount;
   }
 
   void _showSnackBar(BuildContext context, String message) {
@@ -382,9 +384,11 @@ class CartState extends State<Cart> {
                       onPressed: () {
                         setState(() {
                           if (couponController.text.isNotEmpty &&
-                              !discountApplied) {
+                              !discountApplied &&
+                              totalAmount > 0) {
                             if (int.parse(couponController.text) == 4000) {
                               discountAmount = 1000;
+                              withoutDiscount = totalAmount;
                               totalAmount = totalAmount - discountAmount;
                               discountApplied = true;
                             } else {
@@ -418,10 +422,38 @@ class CartState extends State<Cart> {
               Row(
                 children: [
                   Text(
+                    'Total Without Discount',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: HexColor('#1A237E'),
+                    ),
+                  ),
+                  const Spacer(
+                    flex: 2,
+                  ),
+                  Text(
+                    'RS $withoutDiscount',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: HexColor('#D32F2F'),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Text(
                     'Discount',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
-                      fontSize: 18,
+                      fontSize: 17,
                       fontWeight: FontWeight.w600,
                       color: HexColor('#1A237E'),
                     ),
@@ -433,7 +465,7 @@ class CartState extends State<Cart> {
                     'RS $discountAmount',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
-                      fontSize: 18,
+                      fontSize: 17,
                       fontWeight: FontWeight.w600,
                       color: HexColor('#D32F2F'),
                     ),
@@ -441,12 +473,12 @@ class CartState extends State<Cart> {
                 ],
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Row(
                 children: [
                   Text(
-                    'SubTotal',
+                    'Total',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 20,
@@ -476,14 +508,18 @@ class CartState extends State<Cart> {
                 width: screenWidth * 0.9,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Address(
-                          userId: userId,
+                    if (totalAmount > 0) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Payment(
+                            userId: userId,
+                            totalAmount: totalAmount.toString(),
+                            discountAmount: discountAmount,
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('#1A237E'),

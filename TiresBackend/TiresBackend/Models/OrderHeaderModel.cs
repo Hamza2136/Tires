@@ -10,11 +10,26 @@ namespace TiresBackend_DBContext.Model
 {
     public class OrderHeaderModel
     {
+        [Key]
         public int OrderHeaderId { get; set; }
         [Required]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public string CompleteAddress { get; set; }
+        [Required]
+        public string City { get; set; }
+        [Required]
+        public string State { get; set; }
+        [Required]
+        public string Country { get; set; }
+        [Required]
+        public int PhoneNumber { get; set; }
+        [Required]
+        public string PostalCode { get; set; }
         public DateTime DateOfOrder { get; set; }
-        public DateTime DateOfShipping { get; set; }
+        public DateTime? DateOfShipping { get; set; }
         public double OrderTotal { get; set; }
         public string? OrderStatus { get; set; }
         public string? PaymentStatus { get; set; }
@@ -23,16 +38,5 @@ namespace TiresBackend_DBContext.Model
         public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }
         public DateTime DateOfPayment { get; set; }
-        public DateTime DueDate { get; set; }
-        [Required]
-        public int PhoneNumber { get; set; }
-        [Required]
-        public string CompleteAddress { get; set; }
-        [Required]
-        public string Area { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string PostalCode { get; set; }
     }
 }

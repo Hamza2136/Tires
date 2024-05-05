@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:tires/pages/add_address.dart';
-import 'package:tires/pages/payment.dart';
 import 'package:http/http.dart' as http;
 import 'package:tires/url/url.dart';
 
@@ -169,10 +168,10 @@ class AddressState extends State<Address> {
                 width: buttonWidth,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Payment()));
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) => const Payment()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('#1A237E'),

@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+// import 'package:mailer/smtp_server/yandex.dart';
 
 class ResendEmail extends StatefulWidget {
   const ResendEmail({super.key});
@@ -20,6 +23,18 @@ class ResendEmailState extends State<ResendEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: HexColor('#1A237E'),
+            size: 30,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -78,7 +93,7 @@ class ResendEmailState extends State<ResendEmail> {
                 width: 320,
                 child: ElevatedButton(
                   onPressed: () {
-                    debugPrint('Button Pressed');
+                    print('hahahahahah');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('#1A237E'),
